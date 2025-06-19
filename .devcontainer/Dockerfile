@@ -10,7 +10,15 @@ LABEL org.opencontainers.image.authors="simone.rubinacci@unil.ch"
 WORKDIR /docker_build/
 
 # Install required packages
-RUN apt-get update && apt-get install -y build-essential libbz2-dev libcurl4-openssl-dev autoconf libssl-dev wget zlib1g-dev liblzma-dev libdeflate-dev
+RUN apt-get update && apt-get install -y build-essential=12.8ubuntu1.1 \
+                                         libbz2-dev=1.0.8-2 \
+                                         libcurl4-openssl-dev=7.68.0-1ubuntu2.25 \
+                                         autoconf=2.69-11.1 \
+                                         libssl-dev=1.1.1f-1ubuntu2.24 \
+                                         wget=1.20.3-1ubuntu2.1 \
+                                         zlib1g-dev=1:1.2.11.dfsg-2ubuntu1.5 \
+                                         liblzma-dev=5.2.4-1ubuntu1.1 \
+                                         libdeflate-dev=1.5-3
 
 # Download and build boost program_options and iostreams
 RUN wget https://archives.boost.io/release/1.78.0/source/boost_1_78_0.tar.gz && \
@@ -37,7 +45,7 @@ cd .. && \
 rm -r htslib-1.16
 
 # Install github
-RUN apt-get install -y --no-install-recommends git
+RUN apt-get install -y --no-install-recommends git=1:2.25.1-1ubuntu3.14
 
 # Install cmake
 RUN mkdir -p /usr/local
@@ -49,11 +57,11 @@ RUN cd /usr/local &&\
 # Install required packages to debug
 ARG INSTALL_DEBUG_TOOLS=true
 RUN if [ "$INSTALL_DEBUG_TOOLS" = "true" ]; then \
-    apt-get install -y --no-install-recommends openssh-client &&\
-    apt-get install -y --no-install-recommends gdb &&\
-    apt-get install -y --no-install-recommends bcftools &&\
-    apt-get install -y --no-install-recommends less &&\
-    apt-get install -y --no-install-recommends bash-completion ;\
+    apt-get install -y --no-install-recommends openssh-client=1:8.2p1-4ubuntu0.13 &&\
+    apt-get install -y --no-install-recommends gdb=9.2-0ubuntu1~20.04.2 &&\
+    apt-get install -y --no-install-recommends bcftools=1.10.2-2 &&\
+    apt-get install -y --no-install-recommends less=551-1ubuntu0.3 &&\
+    apt-get install -y --no-install-recommends bash-completion=1:2.10-1ubuntu1 ;\
     fi
 
 RUN if [ "$INSTALL_DEBUG_TOOLS" = "true" ]; then \
