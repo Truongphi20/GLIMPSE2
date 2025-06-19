@@ -36,6 +36,35 @@ make install && \
 cd .. && \
 rm -r htslib-1.16
 
+# Install github
+RUN apt-get install -y --no-install-recommends git
+
+# Install cmake
+RUN mkdir -p /usr/local
+RUN cd /usr/local &&\
+    wget https://github.com/Kitware/CMake/releases/download/v4.0.2/cmake-4.0.2-linux-x86_64.sh &&\
+    chmod +x cmake-4.0.2-linux-x86_64.sh &&\
+    ./cmake-4.0.2-linux-x86_64.sh --skip-license
+
+# Install required packages to debug
+ARG INSTALL_DEBUG_TOOLS=true
+RUN if [ "$INSTALL_DEBUG_TOOLS" = "true" ]; then \
+    apt-get install -y --no-install-recommends openssh-client &&\
+    apt-get install -y --no-install-recommends gdb &&\
+    apt-get install -y --no-install-recommends bcftools &&\
+    apt-get install -y --no-install-recommends less &&\
+    apt-get install -y --no-install-recommends bash-completion ;\
+    fi
+
+RUN if [ "$INSTALL_DEBUG_TOOLS" = "true" ]; then \
+    echo '\
+if [ -f /usr/share/bash-completion/bash_completion ]; then\n\
+  . /usr/share/bash-completion/bash_completion\n\
+elif [ -f /etc/bash_completion ]; then\n\
+  . /etc/bash_completion\n\
+fi' >> /root/.bashrc; \
+fi 
+
 # Set workspace
 RUN mkdir -p /workspace
 WORKDIR /workspace
