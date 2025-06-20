@@ -45,6 +45,7 @@
 
 # CMake
 cmake-build-*/
+build
 
 
 ##### Eclipse
