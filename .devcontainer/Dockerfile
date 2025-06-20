@@ -18,7 +18,8 @@ RUN apt-get update && apt-get install -y build-essential=12.8ubuntu1.1 \
                                          wget=1.20.3-1ubuntu2.1 \
                                          zlib1g-dev=1:1.2.11.dfsg-2ubuntu1.5 \
                                          liblzma-dev=5.2.4-1ubuntu1.1 \
-                                         libdeflate-dev=1.5-3
+                                         libdeflate-dev=1.5-3 \
+                                         python3=3.8.2-0ubuntu2
 
 # Download and build boost program_options and iostreams
 RUN wget https://archives.boost.io/release/1.78.0/source/boost_1_78_0.tar.gz && \
