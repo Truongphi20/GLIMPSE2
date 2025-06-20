@@ -64,14 +64,9 @@ RUN if [ "$INSTALL_DEBUG_TOOLS" = "true" ]; then \
     apt-get install -y --no-install-recommends bash-completion=1:2.10-1ubuntu1 ;\
     fi
 
-RUN if [ "$INSTALL_DEBUG_TOOLS" = "true" ]; then \
-    echo '\
-if [ -f /usr/share/bash-completion/bash_completion ]; then\n\
-  . /usr/share/bash-completion/bash_completion\n\
-elif [ -f /etc/bash_completion ]; then\n\
-  . /etc/bash_completion\n\
-fi' >> /root/.bashrc; \
-fi 
+# Set up terminal 
+COPY .devcontainer/.bashrc /root/.bashrc
+
 
 # Set workspace
 RUN mkdir -p /workspace
