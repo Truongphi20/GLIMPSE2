@@ -64,13 +64,13 @@ extern "C" {
 }
 
 //INCLUDES BASE STUFFS
-#include <utils/compressed_io.h>
-#include <utils/random_number.h>
-#include <utils/basic_stats.h>
-#include <utils/basic_algos.h>
-#include <utils/string_utils.h>
-#include <utils/timer.h>
-#include <utils/verbose.h>
+#include "compressed_io.h"
+#include "random_number.h"
+#include "basic_stats.h"
+#include "basic_algos.h"
+#include "string_utils.h"
+#include "timer.h"
+#include "verbose.h"
 
 //TYPEDEFS
 template <typename T>

@@ -23,8 +23,8 @@
  * SOFTWARE.
  ******************************************************************************/
 
-#include "../../versions/versions.h"
-#include <checker/checker_header.h>
+#include "versions.h"
+#include "checker_header.h"
 
 void checker::declare_options() {
 	bpo::options_description opt_base ("Basic options");
