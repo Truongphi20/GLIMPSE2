@@ -7,7 +7,7 @@ add_library(ConcorChecker checker_finalise.cpp
 
 # Link to library
 target_link_libraries(ConcorChecker PUBLIC Utils 
-                                    PUBLIC Versions
+                                    PUBLIC Version_tools
                                     PUBLIC ConcorContainer
 )
 

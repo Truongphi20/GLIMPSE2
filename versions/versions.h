@@ -37,4 +37,7 @@
 #define SNPARRAY_VERSION "2.0.0"
 #define STATS_VERSION "2.0.0"
 
+#define __COMMIT_ID__   "@__COMMIT_ID__@"
+#define __COMMIT_DATE__ "@__COMMIT_DATE__@"
+
 #endif
