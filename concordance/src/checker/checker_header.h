@@ -26,8 +26,8 @@
 #ifndef _CHECKER_H
 #define _CHECKER_H
 
-#include <utils/otools.h>
-#include <containers/call_set_header.h>
+#include "otools.h"
+#include "call_set_header.h"
 
 class checker {
 public:
