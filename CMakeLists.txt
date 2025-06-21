@@ -5,9 +5,24 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Define Git information
+execute_process(
+    COMMAND git rev-parse --short HEAD
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE __COMMIT_ID__
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+) 
+
+execute_process(
+    COMMAND git log -1 --format=%cd --date=short
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE __COMMIT_DATE__
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
 # Create Version packages
-add_library(Versions INTERFACE)
-target_link_directories(Versions INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/versions)
+add_library(Version_tools INTERFACE)
+target_include_directories(Version_tools INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/versions)
 
 # Add modules
 add_subdirectory(concordance)
