@@ -10,7 +10,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 # Set up test_Concordance
-add_executable(test_Concordance test_Concordance.cpp)
+add_executable(test_Concordance test_Concordance.cpp TestFile.cpp)
 target_link_libraries(test_Concordance GTest::gtest_main Concordance)
 add_test(NAME test_Concordance COMMAND test_Concordance)
 
