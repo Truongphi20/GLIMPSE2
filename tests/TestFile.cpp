@@ -15,6 +15,17 @@ std::map<std::string, std::string> TestFile::file_menu
         "1\t123789\t.\tC\tT\t99\tPASS\t.\tGT:DS\t0|1:0.8\t0|0:0.1\t1|1:1.9\n"
         "1\t200123\trs123\tG\tA\t300\tPASS\t.\tGT:DS\t1|1:0.2\t0|1:0.7\t1|0:1.1\n"
         "1\t250000\t.\tT\tC\t150\tPASS\t.\tGT:DS\t1|1:1.95\t0|0:0.05\t0|1:1.2\n"
+    },
+    {"simple_pos_file",
+        "##fileformat=VCFv4.2\n"
+        "##contig=<ID=1,length=1000000>\n"
+        "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n"
+        "##FORMAT=<ID=DS,Number=1,Type=Float,Description=\"Genotype Dosage\">\n"
+        "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\n"
+        "1\t123456\t.\tA\tG\t100\tPASS\t.\tGT:DS\n"
+        "1\t123789\t.\tC\tT\t99\tPASS\t.\tGT:DS\n"
+        "1\t200123\trs123\tG\tA\t300\tPASS\t.\tGT:DS\n"
+        "1\t250000\t.\tT\tC\t150\tPASS\t.\tGT:DS\n"
     }
 
 };
@@ -36,4 +47,21 @@ fs::path TestFile::get_tmp_file(std::string file_key)
 
     return temp_file;
 
+}
+
+fs::path TestFile::create_tmp_file(std::string file_context, std::string file_name)
+{
+    // Generate a unique file name
+    fs::path temp_dir = fs::temp_directory_path();
+    fs::path temp_file;
+    do {
+        temp_file = temp_dir / file_name;
+    } while (fs::exists(temp_file));
+
+    // Write the VCF content
+    std::ofstream out(temp_file);
+    out << file_context;
+    out.close();
+
+    return temp_file;
 }

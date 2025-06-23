@@ -8,6 +8,7 @@ class TestFile
 {
     public:
     std::filesystem::path get_tmp_file(std::string file_name);
+    std::filesystem::path create_tmp_file(std::string file_context, std::string file_name);
 
     private:
     static std::map<std::string, std::string> file_menu;
