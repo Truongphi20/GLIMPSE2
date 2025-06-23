@@ -35,24 +35,26 @@ TEST(Initial, test_create_tmp_vcf_file) {
 TEST(Concordance, test_vcf_vs_itself)
 {
   // Call tmp vcf file
-  fs::path vcf_path = TestFile().get_tmp_file("simple_file");
+  fs::path vcf_path = TestFile().get_tmp_vcf_file("simple_file");
 
   // Create sample file
-  fs::path sample_list = TestFile().create_tmp_file("sample1\nsample2\nsample3", "sample_list.txt");
+  fs::path sample_list = TestFile().create_tmp_file("sample1\nsample2\nsample3", "_sample_list.txt");
 
   // Create posfile
-  fs::path pos_file = TestFile().get_tmp_file("simple_pos_file");
+  fs::path pos_file = TestFile().get_tmp_vcf_file("simple_pos_file");
 
   // Create lst filr
   std::string lst_context {"1\t" + pos_file.string() + "\t" +  vcf_path.string() + "\t" + vcf_path.string()};
-  fs::path lst_file = TestFile().create_tmp_file(lst_context, "lst_file.lst");
+  fs::path lst_file = TestFile().create_tmp_file(lst_context, "_lst_file.lst");
 
   // Create args string
-  std::vector < std::string > args{
-    "GLIMPSE2_concordance  --input " + lst_file.string() + 
-                          "--gt-val"
-                          "--af-tag MAF"
-                          "--samples" + sample_list.string()
+  std::vector<std::string> args{
+      "--input", lst_file.string(),
+      "--gt-val",
+      "--af-tag", "MAF",
+      "--samples", sample_list.string(),
+      "--bins", "0.0", "0.1", "0.2", "0.3", "0.4", "0.5",
+      "--output", "test_output"
   };
 
   // Run concordance
