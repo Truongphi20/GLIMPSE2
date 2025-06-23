@@ -5,15 +5,6 @@
 
 namespace fs = std::filesystem;
 
-// COPY FROM concordance/src/concordance.cpp
-// nt main(int argc, char ** argv) {
-// 	std::vector < std::string > args;
-// 	for (int a = 1 ; a < argc ; a ++) args.push_back(std::string(argv[a]));
-// 	checker().check(args);
-// 	return EXIT_SUCCESS;
-// }
-
-
 // Checking tmp file working normally.
 TEST(Initial, test_create_tmp_vcf_file) {
   // Expected context
@@ -39,4 +30,38 @@ TEST(Initial, test_create_tmp_vcf_file) {
 
   // Check Expected context and actual context
   EXPECT_EQ(actual_context, expected_context);
+}
+
+TEST(Concordance, test_vcf_vs_itself)
+{
+  // Call tmp vcf file
+  fs::path vcf_path = TestFile().get_tmp_file("simple_file");
+
+  // Create sample file
+  fs::path sample_list = TestFile().create_tmp_file("sample1\nsample2\nsample3", "sample_list.txt");
+
+  // Create posfile
+  fs::path pos_file = TestFile().get_tmp_file("simple_pos_file");
+
+  // Create lst filr
+  std::string lst_context {"1\t" + pos_file.string() + "\t" +  vcf_path.string() + "\t" + vcf_path.string()};
+  fs::path lst_file = TestFile().create_tmp_file(lst_context, "lst_file.lst");
+
+  // Create args string
+  std::vector < std::string > args{
+    "GLIMPSE2_concordance  --input " + lst_file.string() + 
+                          "--gt-val"
+                          "--af-tag MAF"
+                          "--samples" + sample_list.string()
+  };
+
+  // Run concordance
+  checker().check(args);
+
+  // Clear tmp file
+  fs::remove(vcf_path);
+  fs::remove(sample_list);
+  fs::remove(pos_file);
+  fs::remove(lst_file);
+
 }
