@@ -22,13 +22,6 @@ std::map<std::string, std::string> TestFile::file_menu
 
 fs::path TestFile::get_tmp_file(std::string file_key)
 {
-     // Seed random once
-    static bool seeded = false;
-    if (!seeded) {
-        std::srand(static_cast<unsigned>(std::time(nullptr)));
-        seeded = true;
-    }
-
     // Generate a unique file name
     fs::path temp_dir = fs::temp_directory_path();
     fs::path temp_file;
