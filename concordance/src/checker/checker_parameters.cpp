@@ -23,6 +23,7 @@
  * SOFTWARE.
  ******************************************************************************/
 
+#define _DECLARE_TOOLBOX_HERE
 #include "versions.h"
 #include "checker_header.h"
 
