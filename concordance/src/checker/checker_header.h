@@ -29,6 +29,14 @@
 #include "otools.h"
 #include "call_set_header.h"
 
+
+/**
+ * @class checker
+ * @brief Class responsible for handling command line options, managing internal data, and performing checks.
+ *
+ * This class provides methods to declare and parse command line options, check and display options,
+ * handle file I/O, and perform main checking operations.
+ */
 class checker {
 public:
 	//COMMAND LINE OPTIONS
