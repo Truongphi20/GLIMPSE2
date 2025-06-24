@@ -29,7 +29,8 @@ RUN apt-get update && apt-get install -y build-essential=12.8ubuntu1.1 \
                                          libhts-dev=1.10.2-3ubuntu0.1
 
 # Install required packages for docs 
-RUN apt-get -y install doxygen=1.8.17-0ubuntu2
+RUN apt-get -y install doxygen=1.8.17-0ubuntu2\
+                       graphviz=2.42.2-3build2
 
 # Download and build boost program_options and iostreams
 RUN wget https://archives.boost.io/release/1.78.0/source/boost_1_78_0.tar.gz && \
