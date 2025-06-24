@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.authors="simone.rubinacci@unil.ch"
 
 WORKDIR /docker_build/
 
-# Install required packages
+# Install required packages for build
 RUN apt-get update && apt-get install -y build-essential=12.8ubuntu1.1 \
                                          libbz2-dev=1.0.8-2 \
                                          libcurl4-openssl-dev=7.68.0-1ubuntu2.25 \
@@ -23,6 +23,10 @@ RUN apt-get update && apt-get install -y build-essential=12.8ubuntu1.1 \
                                          libboost-regex-dev=1.71.0.0ubuntu2\
                                          libboost-iostreams-dev=1.71.0.0ubuntu2\
                                          libhts-dev=1.10.2-3ubuntu0.1
+
+# Install required packages for docs 
+RUN apt-get update && apt-get install -y ruby-full=1:2.7+1
+RUN gem install bundler -v 2.3.27
 
 # Download and build boost program_options and iostreams
 RUN wget https://archives.boost.io/release/1.78.0/source/boost_1_78_0.tar.gz && \
