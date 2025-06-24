@@ -1,0 +1,22 @@
+.md-typeset p {
+  text-align: justify;
+}
+
+.md-typeset ul li,
+.md-typeset ol li {
+  margin-bottom: 0.6em;  /* Reduce vertical space between items */
+  line-height: 1.5;      /* Tighter line spacing within each item */
+}
+
+.md-grid {              /* Wider middle column of pages*/
+  max-width: 73.5%; 
+}
+
+.md-typeset .tabbed-set {
+  border: 0.5px solid var(--md-typeset-table-color);
+}
+
+.md-typeset .tabbed-content {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
