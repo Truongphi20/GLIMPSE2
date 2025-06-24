@@ -8,6 +8,9 @@ LABEL org.opencontainers.image.title="glimpse"
 LABEL org.opencontainers.image.authors="simone.rubinacci@unil.ch"
 
 WORKDIR /docker_build/
+# Set non-interactive mode for apt-get
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=America/New_York
 
 # Install required packages for build
 RUN apt-get update && apt-get install -y build-essential=12.8ubuntu1.1 \
@@ -22,6 +25,7 @@ RUN apt-get update && apt-get install -y build-essential=12.8ubuntu1.1 \
                                          python3=3.8.2-0ubuntu2 \
                                          libboost-regex-dev=1.71.0.0ubuntu2\
                                          libboost-iostreams-dev=1.71.0.0ubuntu2\
+                                         libboost-program-options-dev=1.71.0.0ubuntu2\
                                          libhts-dev=1.10.2-3ubuntu0.1
 
 # Install required packages for docs 
