@@ -7,7 +7,6 @@ LABEL org.opencontainers.image.licences="MIT"
 LABEL org.opencontainers.image.title="glimpse"
 LABEL org.opencontainers.image.authors="simone.rubinacci@unil.ch"
 
-WORKDIR /docker_build/
 # Set non-interactive mode for apt-get
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/New_York
@@ -23,14 +22,18 @@ RUN apt-get update && apt-get install -y build-essential=12.8ubuntu1.1 \
                                          liblzma-dev=5.2.4-1ubuntu1.1 \
                                          libdeflate-dev=1.5-3 \
                                          python3=3.8.2-0ubuntu2 \
+                                         python3-pip=20.0.2-5ubuntu1.11 \
                                          libboost-regex-dev=1.71.0.0ubuntu2\
                                          libboost-iostreams-dev=1.71.0.0ubuntu2\
                                          libboost-program-options-dev=1.71.0.0ubuntu2\
                                          libhts-dev=1.10.2-3ubuntu0.1
 
 # Install required packages for docs 
-RUN apt-get update && apt-get install -y ruby-full=1:2.7+1
-RUN gem install bundler -v 2.3.27
+ARG INSTALL_DOCS_TOOLS=true
+COPY .devcontainer/requirements.txt /src/requirements.txt
+RUN if [ "$INSTALL_DOCS_TOOLS" = "true" ]; then \
+    pip3 install -r /src/requirements.txt;\
+    fi
 
 # Download and build boost program_options and iostreams
 RUN wget https://archives.boost.io/release/1.78.0/source/boost_1_78_0.tar.gz && \

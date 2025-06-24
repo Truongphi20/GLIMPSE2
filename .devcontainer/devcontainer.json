@@ -8,7 +8,7 @@
 		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
 		"dockerfile": "Dockerfile"
 	},
-	"postCreateCommand": "git config --global core.editor 'code --wait' && git remote add odelaneau git@github.com:odelaneau/GLIMPSE.git",
+	"postCreateCommand": "git config --global core.editor 'code --wait'",
 	"customizations": {
 		"vscode": {
 			"extensions": [
