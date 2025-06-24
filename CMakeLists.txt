@@ -5,6 +5,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Set Policy
+cmake_policy(SET CMP0167 NEW)
+
 # Define Git information
 execute_process(
     COMMAND git rev-parse --short HEAD
